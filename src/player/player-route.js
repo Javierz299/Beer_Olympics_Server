@@ -17,16 +17,16 @@ PlayerRouter
         (q_err, q_res) => {
             if(!q_err){
                 console.log('json reached')
-                return res.json(q_res.rows)
+                
+                return res.json(q_res.rows).status(201)
             } else {
                 console.log('reached',q_err)
                 return next(q_err)
             }
             
         }
-    
+        
     )
-    next()
 } catch(err){
     next(err)
 }
