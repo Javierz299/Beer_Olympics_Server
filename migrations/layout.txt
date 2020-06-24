@@ -2,6 +2,7 @@ CREATE TABEL "players"(
     "player_id" SERIAL PRIMARY KEY,
     "full_name" VARCHAR(32) NOT NULL,
     "nickname" VARCHAR(32) NOT NULL,
+    "password" INT(4) NOT NULL,
 )
 
 CREATE TABLE "teams"(
@@ -15,6 +16,5 @@ CREATE TABLE "games"(
     "game_id" SERIAL PRIMARY KEY,
     "team_name" VARCHAR references "teams"(team_name) ON DELETE CASCADE NOT NULL,
     "player_name VARCHAR references "teams"(player_name) ON DELETE CASCADE NOT NULL,
-    "player_id" INT references "teams"(player_id) ON DELETE CASCADE NOT NULL
 )
 
