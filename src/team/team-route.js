@@ -22,7 +22,7 @@ TeamRouter
             )
 
             res.status(201)
-                .json(TeamService.insertTeam(team))
+                .json(TeamService.serializeTeam(team))
 
 
         } catch(err){

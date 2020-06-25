@@ -9,8 +9,7 @@ const TeamService = {
     },
 
     insertTeam(db,newTeam){
-        console.log('db',newTeam)
-        return db
+         return db
           .insert(newTeam)
           .into('teams')
           .returning('*')
