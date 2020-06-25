@@ -1,37 +1,68 @@
-express = require('express')
+const express = require('express')
+
+const PlayerService = require('./player-service')
 
 const PlayerRouter = express.Router()
 const jsonBodyParser = express.json()
-const pool = require('../db')
+
+
+
+
+
 
 PlayerRouter
     .post('/', jsonBodyParser, async (req,res,next) => {
+        const { full_name, nickname, password} = await req.body
+        console.log(full_name, nickname, password)
 
-        const values = await [req.body.full_name, req.body.nickname, req.body.password]
-        console.log(values)
-
-        try{
-        await pool.query(`INSERT INTO players(full_name, nickname, password)
-        VALUES($1, $2, $3)`,
-        values,
-        (q_err, q_res) => {
-            if(!q_err){
-                console.log('json reached')
-                
-                return res.json(q_res.rows).status(201)
-            } else {
-                console.log('reached',q_err)
-                return next(q_err)
-            }
-            
+        const player = {
+            full_name,
+            nickname,
+            password
         }
         
-    )
-} catch(err){
-    next(err)
-}
+        try{
+            PlayerService.insertPlayer(
+                req.app.get('db'),
+                player
+            )
+
+            res.status(201)
+              .json(PlayerService.serializePlayer(player))
+            
+        } catch(err){
+            next(err)
+        }
+
         
 })
+
+PlayerRouter
+    .delete('/delete/:id', async (req,res,next) => {
+        const player_id = await req.params.id
+        const playerId = JSON.stringify(player_id)
+        const playerNum = parseInt(playerId)
+        console.log(playerNum)
+        try {
+            await pool.query(`DELETE FROM players
+            WHERE player_id=$1`,
+            [playerNum],
+            (q_err,q_res) => {
+                if(q_err){
+                    throw q_err;
+                }
+                console.log(q_res)
+                res.status(200).send(`Player deleted with id of: ${q_res}`)
+            }
+        )
+       
+        } catch(err){
+            next(err)
+        }
+       
+
+    
+    })
 
 
 
