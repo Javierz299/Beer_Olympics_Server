@@ -49,11 +49,12 @@ TeamRouter
 
 TeamRouter
     .patch('/update/:id',jsonBodyParser, (req,res,next) => {
-        const { team_name, player_name, player_id } = req.body
-        console.log('patch',team_name,player_name,player_id)
+        const {  player_name, player_id } = req.body
+        console.log('patch',player_name,player_id)
 
-        const teamUpdate = { team_name, player_name, player_id}
-
+        const teamUpdate = { player_name, player_id}
+        //team references full_name for player_name
+        //and reference player_id for id of player
         TeamService.updateTeam(
             req.app.get('db'),
             req.params.id,

@@ -32,7 +32,7 @@ const TeamService = {
     },
     updateTeam(db,id,team){
         return db
-          .from('workouts')
+          .from('teams')
           .where('id',id)
           .update(team)
     },
