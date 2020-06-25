@@ -6,10 +6,6 @@ const PlayerRouter = express.Router()
 const jsonBodyParser = express.json()
 
 
-
-
-
-
 PlayerRouter
     .post('/', jsonBodyParser, async (req,res,next) => {
         const { full_name, nickname, password} = await req.body

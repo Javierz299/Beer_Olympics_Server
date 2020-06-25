@@ -1,4 +1,3 @@
-const { serialize } = require("v8")
 
 const PlayerService = {
     insertPlayer(db,newPlayer){
@@ -11,7 +10,6 @@ const PlayerService = {
 
     },
     serializePlayer(player){
-        
         return{
             id: player.id,
             full_name: player.full_name,

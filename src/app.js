@@ -8,7 +8,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 
 const PlayerRouter = require('./player/player-route')
-//const TeamRouter  = require('./team/team-route')
+const TeamRouter  = require('./team/team-route')
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(cors());
 
 
 app.use('/api/player', PlayerRouter)
-//app.use('/api/team', TeamRouter)
+app.use('/api/team', TeamRouter)
 
 
 
