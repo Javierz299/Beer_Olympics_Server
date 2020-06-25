@@ -11,12 +11,26 @@ const PlayerService = {
 
     },
     serializePlayer(player){
+        
         return{
             id: player.id,
             full_name: player.full_name,
             nickname: player.nickname,
             password: player.password
         }
+    },
+    deletePlayer(db,id){
+        console.log("service",id)
+        return db
+         .from('players')
+         .where('id',id)
+         .delete()
+    },
+    getAllPlayers(db){
+        return db
+            .select('*')
+            .from('players')
+            .then(res => res)
     }
     
 

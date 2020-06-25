@@ -38,31 +38,31 @@ PlayerRouter
 })
 
 PlayerRouter
-    .delete('/delete/:id', async (req,res,next) => {
-        const player_id = await req.params.id
-        const playerId = JSON.stringify(player_id)
-        const playerNum = parseInt(playerId)
-        console.log(playerNum)
-        try {
-            await pool.query(`DELETE FROM players
-            WHERE player_id=$1`,
-            [playerNum],
-            (q_err,q_res) => {
-                if(q_err){
-                    throw q_err;
-                }
-                console.log(q_res)
-                res.status(200).send(`Player deleted with id of: ${q_res}`)
-            }
-        )
-       
-        } catch(err){
-            next(err)
-        }
-       
+    .delete('/delete/:id', (req,res,next) => {
+        const { id } = req.params
+        console.log("param",id)
+        
+
+        PlayerService.deletePlayer(
+            req.app.get('db'),
+            id
+          )
+          .then(rows => res.status(204).end()
+          )
+          .catch(next)
+          
 
     
     })
+
+    PlayerRouter
+        .get('/allplayers', (req,res, next) => {
+            PlayerService.getAllPlayers(req.app.get('db'))
+                .then(response => {
+                    res.json(response.map(p => PlayerService.serializePlayer(p)))
+                })
+                .catch(next)
+        })
 
 
 
