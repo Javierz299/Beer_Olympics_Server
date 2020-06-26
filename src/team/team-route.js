@@ -49,12 +49,20 @@ TeamRouter
 
 TeamRouter
     .patch('/update/:id',jsonBodyParser, (req,res,next) => {
-        const {  player_name, player_id } = req.body
-        console.log('patch',player_name,player_id)
+        const {  player_name, playertwo_name, playerthree_name } = req.body
 
-        const teamUpdate = { player_name, player_id}
+        let teamUpdate
+
+        if(player_name){
+            teamUpdate = player_name
+        } else if(playertwo_name) {
+            teamUpdate = playertwo_name
+        } else if(playerthree_name) {
+            teamUpdate = playerthree_name
+        }
+        console.log('teamupdate',teamUpdate)
+
         //team references full_name for player_name
-        //and reference player_id for id of player
         TeamService.updateTeam(
             req.app.get('db'),
             req.params.id,
@@ -72,6 +80,7 @@ TeamRouter
             req.app.get('db')
         )
         .then(response => {
+            console.log("response",response)
             res.json(response.map(t => TeamService.serializeTeam(t)))
         })
         .catch(next)
