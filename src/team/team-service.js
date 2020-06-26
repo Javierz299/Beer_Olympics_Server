@@ -1,5 +1,3 @@
-const { networkInterfaces } = require("os")
-
 const TeamService = {
     getAllTeams(db){
         return db

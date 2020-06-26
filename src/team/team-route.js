@@ -56,7 +56,7 @@ TeamRouter
         
         console.log('teamupdate',teamUpdate)
 
-        //team references full_name for player_name
+        //team references full_name for player names
         TeamService.updateTeam(
             req.app.get('db'),
             req.params.id,
