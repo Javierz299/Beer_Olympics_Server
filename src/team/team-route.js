@@ -49,17 +49,21 @@ TeamRouter
 
 TeamRouter
     .patch('/update/:id',jsonBodyParser, (req,res,next) => {
-        const {  player_name, playertwo_name, playerthree_name } = req.body
+        let {  player_name, playertwo_name, playerthree_name } = req.body
 
-        let teamUpdate
-
-        if(player_name){
-            teamUpdate = player_name
-        } else if(playertwo_name) {
-            teamUpdate = playertwo_name
-        } else if(playerthree_name) {
-            teamUpdate = playerthree_name
+        if(player_name === undefined){
+            player_name = ''
+           console.log('1 reached')
+        } else if(playertwo_name === undefined && playerthree_name === undefined) {
+                playertwo_name = ''
+                playerthree_name = ''
+        } else if(playertwo_name !== undefined && playerthree_name === undefined){
+            playerthree_name = ''
         }
+
+        let teamUpdate = { player_name, playertwo_name, playerthree_name}
+   
+        
         console.log('teamupdate',teamUpdate)
 
         //team references full_name for player_name
@@ -68,10 +72,9 @@ TeamRouter
             req.params.id,
             teamUpdate
         )
-        .then(rows => res.status(204).end()
-        )
-        .catch(next)
-
+        .then(rows => res.status(204).end())
+        
+       
     })
 
 TeamRouter

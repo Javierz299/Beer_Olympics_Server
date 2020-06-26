@@ -32,6 +32,7 @@ const TeamService = {
 
     },
     updateTeam(db,id,team){
+        console.log('updateservice',team)
         return db
           .from('teams')
           .where('id',id)
