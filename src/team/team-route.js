@@ -51,16 +51,6 @@ TeamRouter
     .patch('/update/:id',jsonBodyParser, (req,res,next) => {
         let {  player_name, playertwo_name, playerthree_name } = req.body
 
-        if(player_name === undefined){
-            player_name = null
-           console.log('1 reached')
-        } else if(playertwo_name === undefined && playerthree_name === undefined) {
-                playertwo_name = null
-                playerthree_name = null
-        } else if(playertwo_name !== undefined && playerthree_name === undefined){
-            playerthree_name = null
-        }
-
         let teamUpdate = { player_name, playertwo_name, playerthree_name}
    
         
