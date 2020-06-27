@@ -29,7 +29,8 @@ const PlayerService = {
             .select('*')
             .from('players')
             .then(res => res)
-    }
+    },
+    
     
 
 }

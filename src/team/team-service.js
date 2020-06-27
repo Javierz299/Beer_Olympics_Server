@@ -19,7 +19,8 @@ const TeamService = {
             team_name: team.team_name,
             player_name: team.player_name,
             playertwo_name: team.playertwo_name,
-            playerthree_name: team.playerthree_name            
+            playerthree_name: team.playerthree_name,
+            playerfour_name: team.playerfour_name         
         }
     },
     deleteTeam(db,id){

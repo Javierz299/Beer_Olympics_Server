@@ -49,9 +49,9 @@ TeamRouter
 
 TeamRouter
     .patch('/update/:id',jsonBodyParser, (req,res,next) => {
-        let {  player_name, playertwo_name, playerthree_name } = req.body
+        let {  player_name, playertwo_name, playerthree_name, playerfour_name } = req.body
 
-        let teamUpdate = { player_name, playertwo_name, playerthree_name}
+        let teamUpdate = { player_name, playertwo_name, playerthree_name, playerfour_name}
    
         
         console.log('teamupdate',teamUpdate)

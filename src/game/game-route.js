@@ -29,7 +29,7 @@ GameRouter
             next(err)
         }
     })
-
+//delete entire game
 GameRouter
     .delete('/delete/:id', (req,res,next) => {
         const { id } = req.params
@@ -41,8 +41,6 @@ GameRouter
         .then(rows => res.status(204).end()
         )
         .catch(next)
-
-
     })
 
 GameRouter
@@ -50,6 +48,11 @@ GameRouter
         let { team_name, player_name, playertwo_name, playerthree_name, playerfour_name } = req.body
         let gameupdate = { team_name, player_name, playertwo_name, playerthree_name, playerfour_name}
         console.log('gameupdate',gameupdate)
+
+
+        // if(GameService.searchPlayer(req.app.get('db'),gameupdate)){
+        //     console.log('ran successful')
+        // }
 
         //game references player name from team names
         GameService.updateGame(

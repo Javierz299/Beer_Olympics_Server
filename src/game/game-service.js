@@ -29,11 +29,20 @@ const GameService = {
         .where('id',id)
         .delete()
     },
+    
     updateGame(db,id,game){
         return db
         .from('games')
         .where('id',id)
         .update(game)
+    },
+    searchPlayer(db,gameupdate){
+        let values = gameupdate.map(g => Object.values(g))
+        console.log(values)
+        return db
+        .select('*')
+        .from('teams')
+        .then( res => console.log('playeres',res))
     }
 }
 
