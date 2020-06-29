@@ -8,13 +8,11 @@ const jsonBodyParser = express.json()
 
 PlayerRouter
     .post('/', jsonBodyParser, async (req,res,next) => {
-        const { full_name, nickname, password} = await req.body
-        console.log(full_name, nickname, password)
+        const { full_name,} = await req.body
+        console.log(full_name,)
 
         const player = {
             full_name,
-            nickname,
-            password
         }
         
         try{

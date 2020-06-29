@@ -13,8 +13,6 @@ const PlayerService = {
         return{
             id: player.id,
             full_name: player.full_name,
-            nickname: player.nickname,
-            password: player.password
         }
     },
     deletePlayer(db,id){
